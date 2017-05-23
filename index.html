@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <form action="javascript:render_calendar()">
+          <div class="form-group">
+            <label for="init_date">Fecha De Inicio</label>
+            <input required type="date" class="form-control" id="init_date" placeholder="Fecha De Inicio">
+          </div>
+          <div class="form-group">
+            <label for="n_day">Numero De Dias</label>
+            <input required type="number" class="form-control" min="1" id="n_day" placeholder="Numero De Dias">
+          </div>
+          <select class="form-control" required>
+            <option >Codigo Del Pais</option>
+            <option value="AR">Argentina</option>
+            <option value="AO">Angola</option>
+            <option value="AR">Argentina</option>
+            <option value="AR">Argentina</option>
+          </select>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+      <div id="calendar">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th colspan="7" class="text-center">
+                mes
+              </th>
+            </tr>
+            <tr>
+              <th>Domingo</th>
+              <th>lunes</th>
+              <th>Martes</th>
+              <th>Miercoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+              <th>Sabado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
