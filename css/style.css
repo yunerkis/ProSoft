@@ -1,6 +1,6 @@
 .container{
   width: 50% !important;
-  border: 1px solid pink;
+  border: 1px solid #F06292;
   padding: 50px;
   border-radius: 5px;
 }
@@ -8,4 +8,20 @@
 .btn{
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+.grey{
+  color: #9E9E9E;
+}
+
+.yellow{
+  color: #FDD835;
+}
+
+.green{
+  color: #2E7D32;
+}
+
+.orange{
+  color:#FF7043;
 }
