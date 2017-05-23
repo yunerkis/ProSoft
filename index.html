@@ -2,7 +2,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title></title>
+    <title>ProSoft Calendar</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <div class="container">
@@ -16,14 +17,15 @@
             <label for="n_day">Numero De Dias</label>
             <input required type="number" class="form-control" min="1" id="n_day" placeholder="Numero De Dias">
           </div>
+          <label for="n_day">Codigo Del Pais</label>
           <select class="form-control" required>
-            <option >Codigo Del Pais</option>
+            <option value="" selected=""></option>
             <option value="AR">Argentina</option>
             <option value="AO">Angola</option>
             <option value="AR">Argentina</option>
             <option value="AR">Argentina</option>
           </select>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-info pull-right">Mostrar</button>
         </form>
       </div>
       <div id="calendar">
@@ -52,7 +54,6 @@
             </tr>
           </tbody>
         </table>
-        
       </div>
     </div>
     <script
