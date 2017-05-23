@@ -86,16 +86,14 @@ function render_test() {
             }
             if (val.getDay()==0 || val.getDay()==6) {
                 text_mind += "<td class='yellow'>"+val.getDate()+"</td>"
+                if (val.getDay()==6) {
+                    text_mind_row += '<tr>'+text_mind+'</tr>'
+                    text_mind = ''
+                }
             }else if (check_holyday(val, holiday||[])) {
                 text_mind += "<td class='orange'>"+val.getDate()+"</td>"
             }else {
                 text_mind += "<td class='green'>"+val.getDate()+"</td>"
-            }
-            if (index>0) {
-                if (formatedDateB[index-1].getDay()<formatedDateB[index].getDay()) {
-                    text_mind_row += '<tr>'+text_mind+'</tr>'
-                    text_mind = ''
-                }
             }
             if (formatedDateB[formatedDateB.length-1] == val) {
                 var text_init = '<table class="table table-bordered"><thead><tr><th colspan="7" class="text-center">'+theMonths[mount]+'</th></tr><tr><th>Domingo</th><th>lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th></tr></thead><tbody><tr><th>'
@@ -106,7 +104,7 @@ function render_test() {
                 text_mind = ''
             }
         });
-    }, 6000)
+    }, 5000)
 }
 
 function render_calendar() {
@@ -125,6 +123,6 @@ function render_calendar() {
     {
         formatedDateB.push(myDate);
     }
-    setTimeout(render_test(), 15000)
+    setTimeout(render_test(), 5000)
 
 }

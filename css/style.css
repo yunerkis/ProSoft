@@ -11,17 +11,25 @@
 }
 
 .grey{
-  color: #9E9E9E;
+  background-color: #9E9E9E;
+  text-align: center;
+  color: white;
 }
 
 .yellow{
-  color: #FDD835;
+  background-color: #FDD835;
+  text-align: center;
+  color: white;
 }
 
 .green{
-  color: #2E7D32;
+  background-color: #2E7D32;
+  text-align: center;
+  color: white;
 }
 
 .orange{
-  color:#FF7043;
+  background-color: #FF7043;
+  text-align: center;
+  color: white;
 }
