@@ -42,3 +42,89 @@ function check_holyday(date, dates) {
     return check.length > 0
 }
 var holiday = []
+
+function render_test() {
+    var text_end = '</th></tr></tbody></table>'
+    var mount = formatedDateB[0].getMonth()
+    var years = formatedDateB[0].getFullYear()
+    var holiday = get_holy_day(formatedDateB[0].getFullYear())
+    var text_mind = ''
+    var text_mind_row = ''
+    $.each(formatedDateA, function(index, val) {
+        if (formatedDateA[formatedDateA.length-1] != val) {
+            if (val.getDay()>1 && index == 0 ) {
+                for (var i = 0; i < val.getDay(); i++) {
+                    if (i==val.getDay()-1) {
+                        text_mind += "<td class='grey'>"+val.getDate()+"</td>"
+                    }else{
+                        text_mind += "<td class='grey'></td>"
+                    }
+                }
+            }else {
+                text_mind += "<td class='grey'>"+val.getDate()+"</td>"
+            }
+            if (index>0) {
+                if (formatedDateA[index].getDay()<formatedDateA[index-1].getDay() || formatedDateA[formatedDateA.length-1] == val) {
+                    text_mind_row += '<tr>'+text_mind+'</tr>'
+                    text_mind = ''
+                }
+            }
+        }
+    });
+    setTimeout(function() {
+        $.each(formatedDateB, function(index, val) {
+            if (val.getFullYear()!=years) {
+                holiday = get_holy_day(formatedDateB[0].getFullYear())
+                years = val.getFullYear()
+            }
+            if (mount!=val.getMonth()) {
+                var text_init = '<table class="table table-bordered"><thead><tr><th colspan="7" class="text-center">'+theMonths[mount]+'</th></tr><tr><th>Domingo</th><th>lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th></tr></thead><tbody><tr><th>'
+                text_mind_row += '<tr>'+text_mind+'</tr>'
+                mount = val.getMonth()
+                $("#calendar").append(text_init+text_mind_row+text_end)
+                text_mind_row = ""
+            }
+            if (val.getDay()==0 || val.getDay()==6) {
+                text_mind += "<td class='yellow'>"+val.getDate()+"</td>"
+            }else if (check_holyday(val, holiday||[])) {
+                text_mind += "<td class='orange'>"+val.getDate()+"</td>"
+            }else {
+                text_mind += "<td class='green'>"+val.getDate()+"</td>"
+            }
+            if (index>0) {
+                if (formatedDateB[index-1].getDay()<formatedDateB[index].getDay()) {
+                    text_mind_row += '<tr>'+text_mind+'</tr>'
+                    text_mind = ''
+                }
+            }
+            if (formatedDateB[formatedDateB.length-1] == val) {
+                var text_init = '<table class="table table-bordered"><thead><tr><th colspan="7" class="text-center">'+theMonths[mount]+'</th></tr><tr><th>Domingo</th><th>lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th></tr></thead><tbody><tr><th>'
+                mount = val.getMonth()
+                text_mind_row += '<tr>'+text_mind+'</tr>'
+                $("#calendar").append(text_init+text_mind_row+text_end)
+                text_mind_row = ""
+                text_mind = ''
+            }
+        });
+    }, 6000)
+}
+
+function render_calendar() {
+    var init_date = $("#init_date").val()
+    init_date = init_date.split("-");
+    var dateA = new Date(init_date[0],init_date[1],init_date[2],0,0,0);
+    var dateB = dateA.addDays(parseInt($("#n_day").val()))
+    var dateC = new Date(init_date[0],init_date[1],1,0,0,0);
+    if (init_date[2]>0) {
+        for(var myDate = dateC; myDate <= dateA; myDate = new Date(myDate.getTime() + 1000 * 60 * 60 * 24))
+        {
+            formatedDateA.push(myDate);
+        } 
+    }
+    for(var myDate = dateA; myDate <= dateB; myDate = new Date(myDate.getTime() + 1000 * 60 * 60 * 24))
+    {
+        formatedDateB.push(myDate);
+    }
+    setTimeout(render_test(), 15000)
+
+}
