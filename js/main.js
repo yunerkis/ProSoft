@@ -3,7 +3,7 @@ Date.prototype.addDays = function(days) {
   dat.setDate(dat.getDate() + days);
   return dat;
 }
-var theMonths = ["January", "February", "March", "April", "May",
+var theMonths = ["", "January", "February", "March", "April", "May",
   "June", "July", "August", "September", "October", "November", "December"];
 var formatedDateA = [];
 var formatedDateB = [];
@@ -23,7 +23,7 @@ function get_holy_day(years) {
         $.each(data, function(index, val) {
             var date1 = val.date
             date1 = date1.split("-");
-            lista.push(new Date(date1[0],date1[1],date1[2],0,0,0))
+            lista.push({date:new Date(date1[0],date1[1],date1[2],0,0,0), name: val.name})
         });
         return lista
     })
@@ -37,7 +37,7 @@ function get_holy_day(years) {
 
 function check_holyday(date, dates) {
     check = dates.filter(function(item) {
-        return data==item
+        return data==item.data
     })
     return check.length > 0
 }
@@ -89,12 +89,15 @@ function render_test() {
                     text_mind = ''
                 }
             }else if (check_holyday(val, holiday||[])) {
-                text_mind += "<td class='orange'>"+val.getDate()+"</td>"
+                check = holiday.filter(function(item) {
+                    return val==item.data
+                })
+                text_mind += "<td class='orange' data-toggle='tooltip' data-placement='left' title='"+check.name+"' >"+val.getDate()+"</td>"
             }else {
                 text_mind += "<td class='green'>"+val.getDate()+"</td>"
             }
             if (formatedDateB[formatedDateB.length-1] == val) {
-                var text_init = '<table class="table table-bordered"><thead><tr><th colspan="7" class="text-center">'+theMonths[mount]+'</th></tr><tr><th>Domingo</th><th>lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th></tr></thead><tbody><tr><th>'
+                var text_init = '<table class="table table-bordered"><thead><tr><th colspan="7" class="text-center">'+theMonths[mount]+'</th></tr><tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr></thead><tbody><tr><th>'
                 mount = val.getMonth()
                 text_mind_row += '<tr>'+text_mind+'</tr>'
                 $("#calendar").append(text_init+text_mind_row+text_end)
@@ -107,6 +110,7 @@ function render_test() {
 
 function render_calendar() {
     var init_date = $("#init_date").val()
+    var d = new Date($("#init_date").val());
     init_date = init_date.split("-");
     var dateA = new Date(init_date[0],init_date[1],init_date[2],0,0,0);
     var dateB = dateA.addDays(parseInt($("#n_day").val()))
