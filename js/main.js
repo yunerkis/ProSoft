@@ -62,9 +62,7 @@ function render_test() {
                 }
             }else {
                 text_mind += "<td class='grey'>"+val.getDate()+"</td>"
-            }
-            if (index>0) {
-                if (formatedDateA[index].getDay()<formatedDateA[index-1].getDay() || formatedDateA[formatedDateA.length-1] == val) {
+                if (val.getDay()==6) {
                     text_mind_row += '<tr>'+text_mind+'</tr>'
                     text_mind = ''
                 }
